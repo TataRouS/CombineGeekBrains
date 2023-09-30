@@ -10,23 +10,20 @@ import Combine
 
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet var textLabel: UILabel!
     
-//    @IBOutlet var textLabel: UILabel!
-//    @IBOutlet var inputTextField: UITextField!
-    
-    var Subscriptions: Set<AnyCancellable> = []
+    var subscriptions: Set<AnyCancellable> = []
     private var viewModel: ViewModel?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         let inputNumber = inputTextField.publisher(for: \.text).compactMap{ $0.flatMap(Int.init) }.eraseToAnyPublisher()
         
-            viewModel = ViewModel(
+        viewModel = ViewModel(
             apiClient: APIClient(), inputIndentifiersPublisher: inputNumber)
         
         viewModel?.episode
@@ -34,17 +31,18 @@ class ViewController: UIViewController {
             .catch { _ in Empty<String, Never>() }
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: {print($0) },
-        receiveValue: {[weak self] text in
-        self?.textLabel.text = text
-        
-    })
-            .store(in: &Subscriptions)
+                  receiveValue: {[weak self] text in
+                self?.textLabel.text = text
+                    print(text)
+                
+            })
+            .store(in: &subscriptions)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(resign))
         view.addGestureRecognizer(tapGesture)
     }
-        
-        @objc private func resign() {
+    
+    @objc private func resign() {
         view.endEditing(true)
         resignFirstResponder()
     }

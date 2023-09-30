@@ -15,7 +15,7 @@ struct APIClient {
     
     func episode(id: Int) -> AnyPublisher<Episode, NetworkError> {
     URLSession.shared
-            .dataTaskPublisher(for: Method.episode(id).url)
+        .dataTaskPublisher(for: Method.episode(id).url)
         .receive(on: queue)
         .map(\.data)
         .decode(type: Episode.self, decoder: decoder)
