@@ -19,9 +19,9 @@ struct APIClient {
         .receive(on: queue)
         .map(\.data)
         .decode(type: Episode.self, decoder: decoder)
-        .breakpoint(receiveOutput: { episode in
-            return episode.id == 7
-        })
+//        .breakpoint(receiveOutput: { episode in
+//            return episode.id == 7
+//        })
     //.catch { _ in Empty<Episode, Error>() }
         .mapError({error -> NetworkError in
             switch error {
