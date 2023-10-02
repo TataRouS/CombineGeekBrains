@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     var subscriptions: Set<AnyCancellable> = []
     private var viewModel: ViewModel?
+    private let episodeObservable = EpisodeObservable(episode: " ")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,21 +32,24 @@ class ViewController: UIViewController {
 //MARK: Реализация ObservableObject выполнена для вывода данных об эпизоде при вводе id эпизода в поле ввода. Результат "EepisodeObservable will change" выводиться в консоль.
         
         
-        let episodeObservable = EpisodeObservable(episode: " ")
         let cancellable = episodeObservable.objectWillChange
             .sink { _ in
-                print("\(episodeObservable) will change")
+                print("\(self.episodeObservable) will change")
             }
+        
         
         viewModel?.episode
             .map { $0.description }
             .catch { _ in Empty<String, Never>() }
             .receive(on: RunLoop.main)
+        
             .sink(receiveCompletion: {print($0) },
                   receiveValue: {[weak self] text in
                 self?.textLabel.text = text
                // print(text)
-                print (episodeObservable.setEpisode(episode: text))
+                
+                print (self?.episodeObservable.setEpisode(episode: text))
+                
             })
             .store(in: &subscriptions)
         
