@@ -27,6 +27,16 @@ class ViewController: UIViewController {
         viewModel = ViewModel(
             apiClient: APIClient(), inputIndentifiersPublisher: inputNumber)
         
+        
+//MARK: Реализация ObservableObject выполнена для вывода данных об эпизоде при вводе id эпизода в поле ввода. Результат "EepisodeObservable will change" выводиться в консоль.
+        
+        
+        let episodeObservable = EpisodeObservable(episode: " ")
+        let cancellable = episodeObservable.objectWillChange
+            .sink { _ in
+                print("\(episodeObservable) will change")
+            }
+        
         viewModel?.episode
             .map { $0.description }
             .catch { _ in Empty<String, Never>() }
@@ -34,17 +44,20 @@ class ViewController: UIViewController {
             .sink(receiveCompletion: {print($0) },
                   receiveValue: {[weak self] text in
                 self?.textLabel.text = text
-                print(text)
-                
+               // print(text)
+                print (episodeObservable.setEpisode(episode: text))
             })
             .store(in: &subscriptions)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(resign))
         view.addGestureRecognizer(tapGesture)
+        
+        
     }
     
-    
 
+//MARK: Реализация Timer выводит данные в Label розовый BackgroundColor
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -73,23 +86,18 @@ class ViewController: UIViewController {
     }
     
     class EpisodeObservable: ObservableObject {
-            @Published var episode: Episode?
-
-            init(episode: Episode?) {
-                self.episode = episode
-            }
+        @Published var episode: String
         
-        func setEpisode(episode: Episode?) -> Int {
+        init(episode: String) {
             self.episode = episode
-            }
         }
-
-    let john = Contact(name: "John Appleseed", age: 24)
-    cancellable = john.objectWillChange
-        .sink { _ in
-            print("\(john.age) will change")
+        
+        func setEpisode(episode: String) {
+            self.episode = episode
+    
+        }
     }
-    print(john.haveBirthday())
+    
     
     @objc private func resign() {
         view.endEditing(true)

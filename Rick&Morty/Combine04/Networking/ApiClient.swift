@@ -13,6 +13,10 @@ struct APIClient {
     private let decoder = JSONDecoder()
     private let queue = DispatchQueue(label: "APIClient", qos: .default, attributes: .concurrent)
     
+ 
+//MARK: В функции закомментирована часть кода по дз№4 задание на отладку части кода. 
+    
+    
     func episode(id: Int) -> AnyPublisher<Episode, NetworkError> {
     URLSession.shared
         .dataTaskPublisher(for: Method.episode(id).url)
