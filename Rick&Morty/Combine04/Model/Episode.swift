@@ -27,19 +27,13 @@ public struct Episode: Codable, CustomStringConvertible {
     public var created: String
  
    
+    public init(id: Int64, name: String, air_date: String, episode: String, created: String)
     
-    
-    
-    public init(id: Int64, name: String, air_date: String, episode: String, created: String
-                
-    )
     {
         self.id = id
         self.name = name
         self.air_date = air_date
         self.episode = episode
         self.created = created
-    
-       
     }
 }

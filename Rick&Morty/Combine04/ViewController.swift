@@ -36,7 +36,7 @@ class ViewController: UIViewController {
             .sink { _ in
                 print("\(self.episodeObservable) will change")
             }
-        
+            .store(in: &subscriptions)
         
         viewModel?.episode
             .map { $0.description }
@@ -52,6 +52,18 @@ class ViewController: UIViewController {
                 
             })
             .store(in: &subscriptions)
+        
+        viewModel?.location
+            .map { $0.description }
+            .catch { _ in Empty<String, Never>() }
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: {print("Location completion \($0)")},
+                  receiveValue: {[weak self] text in
+            print("Location  Data \(text)")
+                
+            })
+            .store(in: &subscriptions)
+        
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(resign))
         view.addGestureRecognizer(tapGesture)
@@ -96,11 +108,13 @@ class ViewController: UIViewController {
             self.episode = episode
         }
         
-        func setEpisode(episode: String) {
+    func setEpisode(episode: String) {
             self.episode = episode
     
         }
     }
+    
+// override func viewDidAppear(_ animated: Bool)
     
     
     @objc private func resign() {
