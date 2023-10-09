@@ -1,17 +1,18 @@
 //
-//  NewViewController.swift
-//  Storyboard
+//  ViewModel.swift
+//  Homework04
 //
-//  Created by Nata Kuznetsova on 06.08.2023.
+//  Created by Nata Kuznetsova on 08.10.2023.
 //
 
 import Foundation
 import Combine
 
-class ViewModel {
-    let apiClient: APIClient
-    let episode: AnyPublisher<Episode, NetworkError>
-    let location: AnyPublisher<Episode, Error>
+class ViewModel: ObservableObject {
+    
+ @Published var apiClient: APIClient
+ @Published var episode: AnyPublisher<Episode, NetworkError>
+ @Published var location: AnyPublisher<Episode, Error>
     
     internal init (
         apiClient: APIClient,
@@ -33,6 +34,3 @@ class ViewModel {
     
     // Do any additional setup after loading the view.
 }
-
-
-

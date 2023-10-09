@@ -13,8 +13,10 @@
 		BD10C93A2A7C09BD0034025F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD10C9382A7C09BD0034025F /* Main.storyboard */; };
 		BD10C93C2A7C09BE0034025F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD10C93B2A7C09BE0034025F /* Assets.xcassets */; };
 		BD10C93F2A7C09BE0034025F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD10C93D2A7C09BE0034025F /* LaunchScreen.storyboard */; };
-		BD10C9892A80034A0034025F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD10C9882A80034A0034025F /* ViewModel.swift */; };
+		BD10C9892A80034A0034025F /* ViewModelNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD10C9882A80034A0034025F /* ViewModelNew.swift */; };
 		BDE27B502ACDC4A300C3E082 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE27B4F2ACDC4A300C3E082 /* Location.swift */; };
+		BDE27B582AD06CE200C3E082 /* SwiftUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE27B572AD06CE200C3E082 /* SwiftUIViewController.swift */; };
+		BDE27B5C2AD3486A00C3E082 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE27B5B2AD3486A00C3E082 /* ViewModel.swift */; };
 		BDEB40FF2AC5C094009CB173 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEB40FE2AC5C094009CB173 /* ApiClient.swift */; };
 		BDEB41012AC5C0A9009CB173 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEB41002AC5C0A9009CB173 /* NetworkError.swift */; };
 		BDEB41032AC5C0B6009CB173 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEB41022AC5C0B6009CB173 /* Method.swift */; };
@@ -32,8 +34,10 @@
 		BD10C93B2A7C09BE0034025F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD10C93E2A7C09BE0034025F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD10C9402A7C09BE0034025F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BD10C9882A80034A0034025F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		BD10C9882A80034A0034025F /* ViewModelNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelNew.swift; sourceTree = "<group>"; };
 		BDE27B4F2ACDC4A300C3E082 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		BDE27B572AD06CE200C3E082 /* SwiftUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIViewController.swift; sourceTree = "<group>"; };
+		BDE27B5B2AD3486A00C3E082 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		BDEB40FE2AC5C094009CB173 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		BDEB41002AC5C0A9009CB173 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		BDEB41022AC5C0B6009CB173 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
@@ -75,7 +79,9 @@
 				BD10C9322A7C09BD0034025F /* AppDelegate.swift */,
 				BD10C9342A7C09BD0034025F /* SceneDelegate.swift */,
 				BD10C9362A7C09BD0034025F /* ViewController.swift */,
-				BD10C9882A80034A0034025F /* ViewModel.swift */,
+				BDE27B572AD06CE200C3E082 /* SwiftUIViewController.swift */,
+				BDE27B5B2AD3486A00C3E082 /* ViewModel.swift */,
+				BD10C9882A80034A0034025F /* ViewModelNew.swift */,
 				BDEB40FD2AC5C076009CB173 /* Networking */,
 				BDEB41042AC5C0C1009CB173 /* Model */,
 				BD10C9382A7C09BD0034025F /* Main.storyboard */,
@@ -183,9 +189,11 @@
 				BDEB410A2AC5C105009CB173 /* PageInfo.swift in Sources */,
 				BDEB41062AC5C0E0009CB173 /* EpisodePage.swift in Sources */,
 				BD10C9352A7C09BD0034025F /* SceneDelegate.swift in Sources */,
+				BDE27B5C2AD3486A00C3E082 /* ViewModel.swift in Sources */,
 				BDEB41012AC5C0A9009CB173 /* NetworkError.swift in Sources */,
+				BDE27B582AD06CE200C3E082 /* SwiftUIViewController.swift in Sources */,
 				BDEB41082AC5C0F5009CB173 /* Episode.swift in Sources */,
-				BD10C9892A80034A0034025F /* ViewModel.swift in Sources */,
+				BD10C9892A80034A0034025F /* ViewModelNew.swift in Sources */,
 				BDEB41032AC5C0B6009CB173 /* Method.swift in Sources */,
 				BDE27B502ACDC4A300C3E082 /* Location.swift in Sources */,
 				BDEB40FF2AC5C094009CB173 /* ApiClient.swift in Sources */,

@@ -42,7 +42,6 @@ class ViewController: UIViewController {
             .map { $0.description }
             .catch { _ in Empty<String, Never>() }
             .receive(on: RunLoop.main)
-        
             .sink(receiveCompletion: {print($0) },
                   receiveValue: {[weak self] text in
                 self?.textLabel.text = text
