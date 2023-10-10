@@ -39,16 +39,20 @@ struct SwiftUIViewController: View {
             TextField("Введите id Эпизода", text: $viewModelNew.id)
             Text("Эпизод \(viewModelNew.episodeDescription)")
                 .foregroundColor(.blue)
-            
-             //   .onTapGesture
-            Spacer()
-                .frame(height: 700)
-            Text("Timer")
-                .onAppear(){
+            .onAppear(){
                 viewModelNew.fetchEpisode()
                     print("onAppear")
                 //        }
             }
+             //   .onTapGesture
+            Spacer()
+                .frame(height: 700)
+            Text("Timer")
+//                .onAppear(){
+//                viewModelNew.fetchEpisode()
+//                    print("onAppear")
+//                //        }
+//            }
         }
     }
     

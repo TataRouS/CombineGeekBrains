@@ -39,13 +39,12 @@ class ViewModelNew: ObservableObject {
     }
     
     func fetchEpisode (){
-        let _: () = self.$id.map {[weak self] episodeId in
+        let _: () = self.$id.flatMap {[weak self] episodeId in
             (self?.apiClient.episode(id: Int(episodeId) ?? 1))! }
             .map { $0.description
-                print ("ViewModel\($0.description)")
+                print ("ViewModel\($0)")
                 return $0.description
                 }
-          //  .switchToLatest()
             .catch { _ in Empty<String, Never>() }
             .receive(on: RunLoop.main)
             .sink(receiveValue: {[weak self] text in
@@ -53,10 +52,11 @@ class ViewModelNew: ObservableObject {
                print(text)
                 
             })
-            .store(in: &subscriptions)
-    
+
+          .store(in: &subscriptions)
     }
-    
+     
+        
     // Do any additional setup after loading the view.
 }
 
