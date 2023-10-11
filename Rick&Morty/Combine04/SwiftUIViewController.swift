@@ -14,16 +14,13 @@ struct SwiftUIViewController: View {
     //   @State var viewModelNew.id = ""
     
     @ObservedObject private var viewModelNew = ViewModelNew(apiClient: APIClient())
-    
-    
-    //    @Strate var subscriptions: Set<AnyCancellable> = []
+    private var subscriptions: Set<AnyCancellable> = []
     
     //    @Strate   private let episodeObservable = EpisodeObservable(episode: " ")
     
     //@State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     //
     //    @State  var inputNumber = inputTextField.publisher(for: \.text).compactMap{ $0.flatMap(Int.init) }.eraseToAnyPublisher()
-    
     
     
     var body: some View {
@@ -39,20 +36,14 @@ struct SwiftUIViewController: View {
             TextField("Введите id Эпизода", text: $viewModelNew.id)
             Text("Эпизод \(viewModelNew.episodeDescription)")
                 .foregroundColor(.blue)
-            .onAppear(){
-                viewModelNew.fetchEpisode()
+                  Spacer()
+                      .frame(height: 500)
+                  Text("Timer\(viewModelNew.episodeTimer)")
+                .onAppear(){
+                    viewModelNew.fetchEpisode()
+                    viewModelNew.startTimer()
                     print("onAppear")
-                //        }
-            }
-             //   .onTapGesture
-            Spacer()
-                .frame(height: 700)
-            Text("Timer")
-//                .onAppear(){
-//                viewModelNew.fetchEpisode()
-//                    print("onAppear")
-//                //        }
-//            }
+                }
         }
     }
     

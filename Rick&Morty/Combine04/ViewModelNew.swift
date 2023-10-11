@@ -12,11 +12,11 @@ class ViewModelNew: ObservableObject {
     
     var subscriptions: Set<AnyCancellable> = []
     
- @Published var apiClient: APIClient
-    //@Published var episode: AnyPublisher<Episode, NetworkError>
-    // @Published var location: AnyPublisher<Episode, Error>
- @Published var id: String = ""
- @Published var episodeDescription: String = ""
+    @Published var apiClient: APIClient
+    @Published var id: String = ""
+    @Published var episodeDescription: String = ""
+    @Published var episodeTimer: String = ""
+    
     
     internal init (
         apiClient: APIClient
@@ -24,18 +24,7 @@ class ViewModelNew: ObservableObject {
     ) {
         self.apiClient = apiClient
         
-        
-//        let networkingForEpisode = self.$id.map {
-//            apiClient.episode(id: Int($0) ?? 1)}
-//            .switchToLatest()
-//            .share()
-//        self.episode = networkingForEpisode.eraseToAnyPublisher()
-        
-//        let networkingForLocation = inputIndentifiersPublisher.map {
-//            apiClient.location(id: $0) }
-//            .switchToLatest()
-//            .share()
-//        self.location = networkingForLocation.eraseToAnyPublisher()
+    
     }
     
     func fetchEpisode (){
@@ -56,8 +45,31 @@ class ViewModelNew: ObservableObject {
           .store(in: &subscriptions)
     }
      
-        
-    // Do any additional setup after loading the view.
+    func startTimer () {
+        let timer = Timer.publish(every: 1, on: RunLoop.main, in: .default).autoconnect()
+
+         timer.sink { [weak self] date in
+                self?.fetchEpisodeData()
+                print(date)
+            }.store(in: &subscriptions)
+    }
+    
+    func fetchEpisodeData() -> Void {
+        let id = Int.random(in: 1..<51)
+        let publisher = self.apiClient.episode(id: id)
+            .map { $0.description
+            print ("Timer data\($0)")
+            return $0.description
+            }
+            .catch { _ in Empty<String, Never>() }
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: {print($0) },
+                receiveValue: {[weak self] text in
+                self?.episodeTimer = text
+                print(text)
+            })
+            .store(in: &subscriptions)
+    }
 }
 
 
