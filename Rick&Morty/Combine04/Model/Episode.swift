@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Episode: Codable, CustomStringConvertible {
+public struct Episode: Codable, Identifiable {
     public var description: String {
 
 """
