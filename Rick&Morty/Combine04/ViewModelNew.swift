@@ -8,19 +8,18 @@
 import Foundation
 import Combine
 
-class ViewModelNew: ObservableObject {
+final class ViewModelNew: ObservableObject {
     
     var subscriptions: Set<AnyCancellable> = []
     
-    @Published var apiClient: APIClient
+    @Published var apiClient: ApiClientProtocol
     @Published var id: String = ""
     @Published var episodeDescription: String = ""
     @Published var episodeTimer: String = ""
     
     
     internal init (
-        apiClient: APIClient
-        
+        apiClient: ApiClientProtocol
     ) {
         self.apiClient = apiClient
         
