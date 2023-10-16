@@ -8,7 +8,14 @@
 import Foundation
 import Combine
 
-struct APIClient {
+protocol ApiClientProtocol {
+    
+    func episode(id: Int) -> AnyPublisher<Episode, NetworkError>
+    func location(id: Int) -> AnyPublisher<Episode, Error>
+}
+
+
+class APIClient: ApiClientProtocol {
     
     private let decoder = JSONDecoder()
     private let queue = DispatchQueue(label: "APIClient", qos: .default, attributes: .concurrent)

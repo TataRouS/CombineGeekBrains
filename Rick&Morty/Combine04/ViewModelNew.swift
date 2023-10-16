@@ -8,19 +8,18 @@
 import Foundation
 import Combine
 
-class ViewModelNew: ObservableObject {
+final class ViewModelNew: ObservableObject {
     
     var subscriptions: Set<AnyCancellable> = []
     
-    @Published var apiClient: APIClient
+    @Published var apiClient: ApiClientProtocol
     @Published var id: String = ""
     @Published var episodeDescription: String = ""
     @Published var episodeTimer: String = ""
     
     
     internal init (
-        apiClient: APIClient
-        
+        apiClient: ApiClientProtocol
     ) {
         self.apiClient = apiClient
         
@@ -31,7 +30,7 @@ class ViewModelNew: ObservableObject {
         let _: () = self.$id.flatMap {[weak self] episodeId in
             (self?.apiClient.episode(id: Int(episodeId) ?? 1))! }
             .map { $0.description
-                print ("ViewModel\($0)")
+                print ("ViewModel_L\($0)")
                 return $0.description
                 }
             .catch { _ in Empty<String, Never>() }
