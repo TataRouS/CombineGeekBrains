@@ -30,7 +30,7 @@ final class ViewModelNew: ObservableObject {
         let _: () = self.$id.flatMap {[weak self] episodeId in
             (self?.apiClient.episode(id: Int(episodeId) ?? 1))! }
             .map { $0.description
-                print ("ViewModel\($0)")
+                print ("ViewModel_L\($0)")
                 return $0.description
                 }
             .catch { _ in Empty<String, Never>() }
